@@ -1,0 +1,82 @@
+{
+  "meta": {
+    "deckId": "gsr-associates",
+    "title": "GSR & Associates",
+    "theme": "consulting"
+  },
+  "slides": [
+    {
+      "type": "title",
+      "headline": "Growing Leaders, Scaling Vision, Together.",
+      "subheadline": "Every founder has a vision that can change industries, communities, even countries. But scaling that vision is lonely and full of obstacles. At GSR & Associates, we don't just advise — we walk the journey with you.",
+      "bullets": ["Strategic Partnership", "Capital Access", "Global Markets", "Founder-First"],
+      "note": "Partner with us"
+    },
+    {
+      "type": "section",
+      "headline": "Our Mission",
+      "subheadline": "We believe in founders, not just formulas.",
+      "bullets": [
+        "GSR invests in founders, ideas, and dreams — and grows alongside them.",
+        "We're not a consultancy that hands you a report and walks away.",
+        "We're partners in vision, risk, and success."
+      ]
+    },
+    {
+      "type": "content",
+      "headline": "The Challenge",
+      "subheadline": "The world loses transformative ideas when founders face these alone.",
+      "bullets": [
+        "Access to capital & markets",
+        "Commercialising innovative ideas",
+        "Navigating complex regulatory or international landscapes",
+        "Scaling without losing the mission or culture"
+      ],
+      "note": "Many founders struggle with barriers that are too complex to navigate in isolation. The gap between a brilliant idea and global impact requires more than advice — it requires a partner."
+    },
+    {
+      "type": "content",
+      "headline": "Partnership Model",
+      "subheadline": "Every milestone, every risk, every triumph.",
+      "bullets": [
+        "GSR invests alongside you — we succeed when you succeed",
+        "Month 1–3: Market Research & Strategy",
+        "Month 4–6: Network Activation & Introductions",
+        "Month 7–9: Capital Raising & Deal Structuring",
+        "Month 10–12: Scale, Optimise & Expand"
+      ],
+      "note": "GSR didn't just advise us, they invested in us."
+    },
+    {
+      "type": "beforeAfter",
+      "headline": "What We Do",
+      "left": {
+        "title": "Capital & Markets",
+        "bullets": [
+          "Unlock access to local and global investor networks",
+          "Structure deals that protect founder equity",
+          "Facilitate introductions to strategic capital partners"
+        ]
+      },
+      "right": {
+        "title": "Strategy & Growth",
+        "bullets": [
+          "Translate vision into executable go-to-market plans",
+          "Navigate regulatory and international landscapes",
+          "Build scalable operations without losing culture"
+        ]
+      }
+    },
+    {
+      "type": "closing",
+      "headline": "Ready to Scale Your Vision?",
+      "subheadline": "Join the founders who chose a true partner over a consultant.",
+      "bullets": [
+        "hello@gsrassociates.com",
+        "www.gsrassociates.com",
+        "LinkedIn: GSR & Associates",
+        "Available for new partnerships"
+      ]
+    }
+  ]
+}

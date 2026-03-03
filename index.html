@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GSR &amp; Associates — Growing Leaders, Scaling Vision</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── RESET ─────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { -webkit-text-size-adjust: 100%; overflow-x: hidden; scroll-behavior: smooth; }
+
+    /* ─── TOKENS ────────────────────────────────────── */
+    :root {
+      --bg:        #0f0f0f;
+      --bg-raised: #161616;
+      --bg-card:   #1c1c1c;
+      --line:      #2a2a2a;
+      --line-mid:  #333333;
+      --text:      #e8e4dc;       /* warm off-white — easier on eyes than pure white */
+      --text-mid:  #a09890;       /* secondary */
+      --text-dim:  #6b6460;       /* labels, captions */
+      --amber:     #c8923a;       /* the accent — brass, not orange */
+      --amber-lt:  #dba95c;
+      --amber-bg:  rgba(200,146,58,0.08);
+      --white:     #ffffff;
+
+      --display: 'Syne', sans-serif;           /* geometric, confident, contemporary */
+      --body:    'Instrument Sans', sans-serif; /* warm, readable, humanist */
+      --serif:   'Instrument Serif', serif;     /* for pull-quotes and accents */
+
+      --nav-h: 64px;
+      --section-pad: 120px;
+      --max: 1120px;
+    }
+
+    /* ─── BASE ──────────────────────────────────────── */
+    body {
+      font-family: var(--body);
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      line-height: 1.6;
+      /* subtle noise grain — barely there, but adds depth */
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+    }
+
+    /* ─── NAV ───────────────────────────────────────── */
+    #nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: var(--nav-h);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 48px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(15,15,15,0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      transition: border-color 0.3s;
+    }
+    .nav-logo {
+      font-family: var(--display);
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+    .nav-logo em {
+      font-style: normal;
+      color: var(--amber);
+    }
+    .nav-cta {
+      font-family: var(--body);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: var(--bg);
+      background: var(--amber);
+      border: none;
+      padding: 9px 22px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .nav-cta:hover { background: var(--amber-lt); transform: translateY(-1px); }
+
+    /* ─── SECTIONS SHARED ───────────────────────────── */
+    section {
+      padding: var(--section-pad) 48px;
+      max-width: 100%;
+      overflow: hidden;
+    }
+    .inner {
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+
+    /* Reveal animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.75s cubic-bezier(0.16,1,0.3,1),
+                  transform 0.75s cubic-bezier(0.16,1,0.3,1);
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1 !important; transform: none !important; }
+    }
+
+    /* Section label */
+    .label {
+      font-family: var(--display);
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .label::before {
+      content: '';
+      width: 24px; height: 1px;
+      background: var(--amber);
+      flex-shrink: 0;
+    }
+
+    /* ═══════════════════════════════════════════════
+       HERO
+    ═══════════════════════════════════════════════ */
+    #hero {
+      min-height: 100dvh;
+      padding: 0 48px;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+    }
+
+    /* Geometric accent — large background character */
+    #hero::before {
+      content: 'GSR';
+      position: absolute;
+      right: -20px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: var(--display);
+      font-size: clamp(18rem, 28vw, 36rem);
+      font-weight: 800;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(255,255,255,0.03);
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+      letter-spacing: -0.04em;
+    }
+
+    .hero-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      width: 100%;
+      padding-top: var(--nav-h);
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 80px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-left {}
+
+    .hero-label {
+      font-family: var(--display);
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 32px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .hero-label::before {
+      content: '';
+      width: 24px; height: 1px;
+      background: var(--amber);
+    }
+
+    .hero-h1 {
+      font-family: var(--display);
+      font-size: clamp(3rem, 6.5vw, 6rem);
+      font-weight: 800;
+      line-height: 1.0;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      margin-bottom: 32px;
+    }
+    .hero-h1 .accent {
+      color: var(--amber);
+      font-style: italic;
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 1.05em;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-body {
+      font-size: clamp(1rem, 1.5vw, 1.15rem);
+      color: var(--text-mid);
+      line-height: 1.8;
+      max-width: 520px;
+      margin-bottom: 44px;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .btn-primary {
+      font-family: var(--body);
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: var(--bg);
+      background: var(--amber);
+      border: none;
+      padding: 14px 32px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { background: var(--amber-lt); transform: translateY(-1px); }
+
+    .btn-ghost {
+      font-family: var(--body);
+      font-size: 0.88rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: var(--text-mid);
+      background: none;
+      border: 1px solid var(--line-mid);
+      padding: 13px 28px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-ghost:hover { border-color: var(--amber); color: var(--amber); }
+
+    /* Hero right — stats panel */
+    .hero-stats {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      padding: 40px 36px;
+    }
+
+    .hero-stat {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .hero-stat:first-child { padding-top: 0; }
+    .hero-stat:last-child { border-bottom: none; padding-bottom: 0; }
+
+    .stat-label {
+      font-family: var(--display);
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 6px;
+    }
+    .stat-val {
+      font-family: var(--display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.1;
+    }
+    .stat-val.amber { color: var(--amber); }
+    .stat-note {
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      margin-top: 4px;
+      line-height: 1.4;
+    }
+
+    /* Scroll indicator */
+    .hero-scroll {
+      position: absolute;
+      bottom: 36px;
+      left: 48px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--display);
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+    .scroll-line {
+      width: 40px; height: 1px;
+      background: var(--line-mid);
+      position: relative;
+      overflow: hidden;
+    }
+    .scroll-line::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: var(--amber);
+      animation: slide-line 2s ease-in-out infinite;
+    }
+    @keyframes slide-line {
+      0%   { left: -100%; }
+      50%  { left: 0%; }
+      100% { left: 100%; }
+    }
+
+    /* ═══════════════════════════════════════════════
+       MISSION
+    ═══════════════════════════════════════════════ */
+    #mission {
+      background: var(--bg);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .mission-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 100px;
+      align-items: start;
+    }
+
+    .mission-left h2 {
+      font-family: var(--display);
+      font-size: clamp(2.4rem, 4.5vw, 4rem);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      margin-bottom: 28px;
+    }
+    .mission-left h2 em {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      color: var(--amber);
+      letter-spacing: -0.01em;
+      font-size: 1.05em;
+    }
+
+    .mission-body {
+      font-size: clamp(0.95rem, 1.4vw, 1.08rem);
+      color: var(--text-mid);
+      line-height: 1.85;
+      margin-bottom: 32px;
+    }
+
+    .mission-quote {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: clamp(1.1rem, 1.6vw, 1.3rem);
+      color: var(--text);
+      line-height: 1.65;
+      padding-left: 24px;
+      border-left: 1px solid var(--amber);
+    }
+
+    /* Pillars — right side */
+    .pillars { display: flex; flex-direction: column; }
+
+    .pillar {
+      display: grid;
+      grid-template-columns: 32px 1fr;
+      gap: 20px;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--line);
+      align-items: start;
+      transition: border-color 0.2s;
+    }
+    .pillar:first-child { border-top: 1px solid var(--line); }
+    .pillar:hover { border-bottom-color: var(--amber); }
+
+    .pillar-n {
+      font-family: var(--display);
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--amber);
+      padding-top: 3px;
+    }
+    .pillar-name {
+      font-family: var(--body);
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 5px;
+    }
+    .pillar-desc {
+      font-size: 0.85rem;
+      color: var(--text-mid);
+      line-height: 1.6;
+    }
+
+    /* ═══════════════════════════════════════════════
+       CHALLENGE
+    ═══════════════════════════════════════════════ */
+    #challenge {
+      background: var(--bg-raised);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .challenge-grid {
+      display: grid;
+      grid-template-columns: 400px 1fr;
+      gap: 100px;
+      align-items: start;
+    }
+
+    .challenge-left h2 {
+      font-family: var(--display);
+      font-size: clamp(2.4rem, 4.5vw, 4rem);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      margin-bottom: 24px;
+    }
+    .challenge-left h2 em {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      color: var(--amber);
+      font-size: 1.05em;
+    }
+
+    .challenge-body {
+      font-size: clamp(0.92rem, 1.3vw, 1.02rem);
+      color: var(--text-mid);
+      line-height: 1.85;
+    }
+
+    .challenge-items { display: flex; flex-direction: column; padding-top: 8px; }
+
+    .ch-item {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      padding: 22px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .ch-item:first-child { border-top: 1px solid var(--line); }
+
+    .ch-num {
+      font-family: var(--display);
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--amber);
+      padding-top: 4px;
+      flex-shrink: 0;
+      width: 24px;
+    }
+    .ch-text {
+      font-size: clamp(0.95rem, 1.3vw, 1.05rem);
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.5;
+    }
+    .ch-sub {
+      font-size: 0.82rem;
+      color: var(--text-mid);
+      margin-top: 4px;
+      line-height: 1.55;
+    }
+
+    /* ═══════════════════════════════════════════════
+       MODEL
+    ═══════════════════════════════════════════════ */
+    #model {
+      background: var(--bg);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .model-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 100px;
+      align-items: start;
+    }
+
+    .model-left h2 {
+      font-family: var(--display);
+      font-size: clamp(2.4rem, 4.5vw, 4rem);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      margin-bottom: 24px;
+    }
+    .model-left h2 em {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      color: var(--amber);
+      font-size: 1.05em;
+    }
+
+    .model-body {
+      font-size: clamp(0.92rem, 1.3vw, 1.02rem);
+      color: var(--text-mid);
+      line-height: 1.85;
+      margin-bottom: 28px;
+    }
+
+    .model-quote {
+      background: var(--amber-bg);
+      border-left: 2px solid var(--amber);
+      padding: 20px 24px;
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: clamp(1rem, 1.4vw, 1.15rem);
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    /* Timeline */
+    .tl-head {
+      font-family: var(--display);
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .tl { display: flex; flex-direction: column; }
+
+    .tl-row {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 20px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--line);
+      align-items: baseline;
+      transition: background 0.15s;
+    }
+    .tl-row:first-child { border-top: 1px solid var(--line); }
+    .tl-row:hover { background: rgba(200,146,58,0.04); }
+
+    .tl-period {
+      font-family: var(--display);
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--amber);
+    }
+    .tl-act {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    /* ═══════════════════════════════════════════════
+       SERVICES
+    ═══════════════════════════════════════════════ */
+    #services {
+      background: var(--bg-raised);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .services-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 56px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--line);
+      gap: 32px;
+    }
+
+    .services-head h2 {
+      font-family: var(--display);
+      font-size: clamp(2.4rem, 4.5vw, 4rem);
+      font-weight: 700;
+      line-height: 1.0;
+      letter-spacing: -0.03em;
+      color: var(--text);
+    }
+
+    .services-intro {
+      max-width: 360px;
+      font-size: 0.92rem;
+      color: var(--text-mid);
+      line-height: 1.7;
+      text-align: right;
+    }
+
+    .services-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      background: var(--line);
+    }
+
+    .svc-col {
+      background: var(--bg-card);
+      padding: 44px 40px;
+    }
+
+    .svc-title {
+      font-family: var(--display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 32px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .svc-title::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--amber);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .svc-items { display: flex; flex-direction: column; }
+
+    .svc-item {
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: clamp(0.88rem, 1.2vw, 0.96rem);
+      color: var(--text-mid);
+      line-height: 1.55;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      transition: color 0.15s;
+    }
+    .svc-item:last-child { border-bottom: none; }
+    .svc-item:hover { color: var(--text); }
+    .svc-item::before {
+      content: '→';
+      color: var(--amber);
+      flex-shrink: 0;
+      font-size: 0.85rem;
+      margin-top: 1px;
+    }
+
+    /* ═══════════════════════════════════════════════
+       CONTACT
+    ═══════════════════════════════════════════════ */
+    #contact {
+      background: var(--bg);
+      border-top: none;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 100px;
+      align-items: start;
+    }
+
+    .contact-left h2 {
+      font-family: var(--display);
+      font-size: clamp(2.8rem, 5.5vw, 5rem);
+      font-weight: 800;
+      line-height: 1.0;
+      letter-spacing: -0.04em;
+      color: var(--text);
+      margin-bottom: 28px;
+    }
+    .contact-left h2 em {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      color: var(--amber);
+      font-size: 1.05em;
+      letter-spacing: -0.02em;
+    }
+
+    .contact-body {
+      font-size: clamp(0.95rem, 1.4vw, 1.08rem);
+      color: var(--text-mid);
+      line-height: 1.8;
+      max-width: 480px;
+      margin-bottom: 48px;
+    }
+
+    .contact-links { display: flex; flex-direction: column; }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--line);
+      text-decoration: none;
+      transition: border-color 0.2s;
+      gap: 16px;
+    }
+    .contact-link:first-child { border-top: 1px solid var(--line); }
+    .contact-link:hover { border-bottom-color: var(--amber); }
+    .contact-link:hover .cl-val { color: var(--amber); }
+    .contact-link:hover .cl-arrow { transform: translate(3px, -3px); color: var(--amber); }
+
+    .cl-left { display: flex; flex-direction: column; gap: 3px; }
+    .cl-type {
+      font-family: var(--display);
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+    .cl-val {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text);
+      transition: color 0.2s;
+    }
+    .cl-arrow {
+      font-size: 1.1rem;
+      color: var(--text-dim);
+      transition: transform 0.2s, color 0.2s;
+    }
+
+    /* Right side — availability card */
+    .avail-card {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      padding: 40px;
+      position: sticky;
+      top: calc(var(--nav-h) + 32px);
+    }
+
+    .avail-status {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+    .avail-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #4ade80;
+      animation: pulse-dot 2.5s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%,100% { opacity: 1; box-shadow: 0 0 0 0 rgba(74,222,128,0.4); }
+      50%      { opacity: 0.8; box-shadow: 0 0 0 6px rgba(74,222,128,0); }
+    }
+    .avail-label {
+      font-family: var(--display);
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #4ade80;
+    }
+
+    .avail-title {
+      font-family: var(--display);
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 14px;
+      line-height: 1.2;
+    }
+
+    .avail-body {
+      font-size: 0.88rem;
+      color: var(--text-mid);
+      line-height: 1.7;
+      margin-bottom: 32px;
+    }
+
+    .avail-cta {
+      display: block;
+      width: 100%;
+      padding: 14px 24px;
+      background: var(--amber);
+      color: var(--bg);
+      border: none;
+      font-family: var(--body);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .avail-cta:hover { background: var(--amber-lt); transform: translateY(-1px); }
+
+    .avail-meta {
+      margin-top: 20px;
+      font-size: 0.76rem;
+      color: var(--text-dim);
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    /* ─── FOOTER ────────────────────────────────────── */
+    #footer {
+      padding: 32px 48px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--bg);
+    }
+    .footer-logo {
+      font-family: var(--display);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+    .footer-logo em { font-style: normal; color: var(--amber); }
+    .footer-note {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+    }
+
+    /* ─── RESPONSIVE ────────────────────────────────── */
+    @media (max-width: 1024px) {
+      :root { --section-pad: 80px; }
+      #nav { padding: 0 32px; }
+      section { padding: var(--section-pad) 32px; }
+      #hero { padding: 0 32px; }
+      #footer { padding: 28px 32px; }
+
+      .hero-inner { grid-template-columns: 1fr; gap: 48px; padding-top: calc(var(--nav-h) + 40px); }
+      .hero-stats { display: grid; grid-template-columns: repeat(2, 1fr); }
+      .hero-stat { padding: 16px; border-bottom: none; border-right: 1px solid var(--line); }
+      .hero-stat:nth-child(even) { border-right: none; }
+      #hero::before { display: none; }
+      .hero-scroll { left: 32px; }
+
+      .mission-grid,
+      .challenge-grid,
+      .model-grid { grid-template-columns: 1fr; gap: 56px; }
+      .challenge-grid { grid-template-columns: 1fr; }
+
+      .services-head { flex-direction: column; align-items: flex-start; }
+      .services-intro { text-align: left; max-width: 100%; }
+
+      .contact-grid { grid-template-columns: 1fr; gap: 56px; }
+      .avail-card { position: static; }
+    }
+
+    @media (max-width: 600px) {
+      :root { --nav-h: 52px; --section-pad: 60px; }
+      #nav { padding: 0 20px; }
+      .nav-logo { font-size: 0.78rem; }
+      .nav-cta { padding: 7px 14px; font-size: 0.72rem; }
+
+      section { padding: var(--section-pad) 20px; }
+      #hero { padding: 0 20px; min-height: auto; padding-bottom: 60px; }
+      #footer { padding: 24px 20px; flex-direction: column; gap: 12px; text-align: center; }
+
+      .hero-inner { gap: 36px; padding-top: calc(var(--nav-h) + 32px); }
+      .hero-h1 { font-size: clamp(2.6rem, 11vw, 4rem); }
+      .hero-actions { flex-direction: column; align-items: flex-start; gap: 12px; }
+      .btn-primary, .btn-ghost { width: 100%; text-align: center; }
+      .hero-stats { grid-template-columns: 1fr 1fr; }
+      .hero-stat { padding: 12px; }
+      .hero-scroll { display: none; }
+
+      .mission-grid,
+      .challenge-grid,
+      .model-grid { gap: 40px; }
+
+      .services-head { margin-bottom: 32px; }
+      .services-cols { grid-template-columns: 1fr; }
+      .svc-col { padding: 28px 24px; }
+
+      .contact-left h2 { font-size: clamp(2.4rem, 10vw, 3.5rem); }
+      .avail-card { padding: 28px 24px; }
+    }
+
+    @media (max-width: 380px) {
+      section { padding: 48px 16px; }
+      #hero { padding: 0 16px; }
+      .hero-h1 { font-size: 2.4rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <span class="nav-logo">GSR <em>&</em> Associates</span>
+    <a href="#contact" class="nav-cta">Get in Touch</a>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-inner">
+      <div class="hero-left">
+        <div class="hero-label reveal">GSR &amp; Associates</div>
+        <h1 class="hero-h1 reveal" style="transition-delay:80ms">
+          Growing Leaders,<br>
+          <span class="accent">Scaling Vision,</span><br>
+          Together.
+        </h1>
+        <p class="hero-body reveal" style="transition-delay:160ms">
+          Every founder has a vision that can change industries, communities, even countries.
+          But scaling that vision is lonely and full of obstacles.
+          At GSR &amp; Associates, we don't just advise — we walk the journey with you.
+        </p>
+        <div class="hero-actions reveal" style="transition-delay:240ms">
+          <a href="#contact" class="btn-primary">Partner With Us</a>
+          <a href="#model" class="btn-ghost">How It Works</a>
+        </div>
+      </div>
+      <div class="hero-stats reveal" style="transition-delay:200ms">
+        <div class="hero-stat">
+          <div class="stat-label">Model</div>
+          <div class="stat-val amber">Founder-First</div>
+          <div class="stat-note">We succeed when you succeed</div>
+        </div>
+        <div class="hero-stat">
+          <div class="stat-label">Engagement</div>
+          <div class="stat-val">12 Months</div>
+          <div class="stat-note">Structured, milestone-driven</div>
+        </div>
+        <div class="hero-stat">
+          <div class="stat-label">Capital Access</div>
+          <div class="stat-val">Global</div>
+          <div class="stat-note">Local &amp; international networks</div>
+        </div>
+        <div class="hero-stat">
+          <div class="stat-label">Alignment</div>
+          <div class="stat-val amber">Equity</div>
+          <div class="stat-note">Skin in the game, not just advice</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      Scroll
+    </div>
+  </section>
+
+  <!-- MISSION -->
+  <section id="mission">
+    <div class="inner">
+      <div class="mission-grid">
+        <div class="mission-left">
+          <div class="label reveal">Our Mission</div>
+          <h2 class="reveal" style="transition-delay:80ms">
+            We believe in<br><em>founders,</em><br>not formulas.
+          </h2>
+          <p class="mission-body reveal" style="transition-delay:160ms">
+            GSR invests in founders, ideas, and dreams — and grows alongside them.
+            We're not a consultancy that hands you a report and walks away.
+            We are partners in vision, risk, and success.
+          </p>
+          <p class="mission-quote reveal" style="transition-delay:220ms">
+            The gap between a brilliant idea and global impact<br>
+            requires more than advice — it requires a partner.
+          </p>
+        </div>
+        <div class="pillars reveal" style="transition-delay:120ms">
+          <div class="pillar">
+            <div class="pillar-n">01</div>
+            <div>
+              <div class="pillar-name">True Partnership</div>
+              <div class="pillar-desc">We invest in your vision, not just your metrics. Our interests are aligned with yours at every stage.</div>
+            </div>
+          </div>
+          <div class="pillar">
+            <div class="pillar-n">02</div>
+            <div>
+              <div class="pillar-name">Global Reach</div>
+              <div class="pillar-desc">Established connections across markets, industries and jurisdictions on every continent.</div>
+            </div>
+          </div>
+          <div class="pillar">
+            <div class="pillar-n">03</div>
+            <div>
+              <div class="pillar-name">Scale Infrastructure</div>
+              <div class="pillar-desc">Systems and strategies architected for sustained, exponential growth without cultural compromise.</div>
+            </div>
+          </div>
+          <div class="pillar">
+            <div class="pillar-n">04</div>
+            <div>
+              <div class="pillar-name">Ideas Before Trends</div>
+              <div class="pillar-desc">We identify and back transformative ideas before they become conventional wisdom.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHALLENGE -->
+  <section id="challenge">
+    <div class="inner">
+      <div class="challenge-grid">
+        <div class="challenge-left">
+          <div class="label reveal">The Challenge</div>
+          <h2 class="reveal" style="transition-delay:80ms">
+            The world loses great ideas when founders face this <em>alone.</em>
+          </h2>
+          <p class="challenge-body reveal" style="transition-delay:160ms">
+            Many founders struggle with barriers that are simply too complex to navigate in isolation.
+            The gap between a brilliant idea and global impact requires more than advice —
+            it requires a partner with skin in the game.
+          </p>
+        </div>
+        <div class="challenge-items reveal" style="transition-delay:100ms">
+          <div class="ch-item">
+            <div class="ch-num">01</div>
+            <div>
+              <div class="ch-text">Access to capital &amp; markets</div>
+              <div class="ch-sub">Knowing the right doors to knock on — and having the credibility to open them.</div>
+            </div>
+          </div>
+          <div class="ch-item">
+            <div class="ch-num">02</div>
+            <div>
+              <div class="ch-text">Commercialising innovative ideas</div>
+              <div class="ch-sub">Translating a breakthrough concept into a structured, scalable business model.</div>
+            </div>
+          </div>
+          <div class="ch-item">
+            <div class="ch-num">03</div>
+            <div>
+              <div class="ch-text">Navigating regulatory &amp; international landscapes</div>
+              <div class="ch-sub">Crossing borders and compliance frameworks without losing momentum.</div>
+            </div>
+          </div>
+          <div class="ch-item">
+            <div class="ch-num">04</div>
+            <div>
+              <div class="ch-text">Scaling without losing the mission</div>
+              <div class="ch-sub">Growth that preserves the culture and values that made the company worth building.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODEL -->
+  <section id="model">
+    <div class="inner">
+      <div class="model-grid">
+        <div class="model-left">
+          <div class="label reveal">Partnership Model</div>
+          <h2 class="reveal" style="transition-delay:80ms">
+            Every milestone,<br>every risk,<br>every <em>triumph.</em>
+          </h2>
+          <p class="model-body reveal" style="transition-delay:160ms">
+            GSR invests alongside you. We succeed when you succeed.
+            We are present through every critical decision — celebrating
+            wins and navigating setbacks with equal commitment.
+          </p>
+          <div class="model-quote reveal" style="transition-delay:220ms">
+            "GSR didn't just advise us — they invested in us."
+          </div>
+        </div>
+        <div class="reveal" style="transition-delay:120ms">
+          <div class="tl-head">12-Month Engagement Framework</div>
+          <div class="tl">
+            <div class="tl-row">
+              <div class="tl-period">Month 1–3</div>
+              <div class="tl-act">Market Research &amp; Strategy</div>
+            </div>
+            <div class="tl-row">
+              <div class="tl-period">Month 4–6</div>
+              <div class="tl-act">Network Activation &amp; Introductions</div>
+            </div>
+            <div class="tl-row">
+              <div class="tl-period">Month 7–9</div>
+              <div class="tl-act">Capital Raising &amp; Deal Structuring</div>
+            </div>
+            <div class="tl-row">
+              <div class="tl-period">Month 10–12</div>
+              <div class="tl-act">Scale, Optimise &amp; Expand</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="inner">
+      <div class="services-head">
+        <div>
+          <div class="label reveal">What We Do</div>
+          <h2 class="reveal" style="transition-delay:80ms">Our Core Services</h2>
+        </div>
+        <p class="services-intro reveal" style="transition-delay:120ms">
+          Two disciplines, one integrated approach.
+          Capital and strategy working in parallel so nothing falls through the gap.
+        </p>
+      </div>
+      <div class="services-cols reveal" style="transition-delay:160ms">
+        <div class="svc-col">
+          <div class="svc-title">Capital &amp; Markets</div>
+          <div class="svc-items">
+            <div class="svc-item">Unlock access to local and global investor networks</div>
+            <div class="svc-item">Structure deals that protect founder equity</div>
+            <div class="svc-item">Facilitate introductions to strategic capital partners</div>
+          </div>
+        </div>
+        <div class="svc-col">
+          <div class="svc-title">Strategy &amp; Growth</div>
+          <div class="svc-items">
+            <div class="svc-item">Translate vision into executable go-to-market plans</div>
+            <div class="svc-item">Navigate regulatory and international landscapes</div>
+            <div class="svc-item">Build scalable operations without losing culture</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="inner">
+      <div class="contact-grid">
+        <div class="contact-left">
+          <div class="label reveal">Get In Touch</div>
+          <h2 class="reveal" style="transition-delay:80ms">
+            Ready to scale<br>your <em>vision?</em>
+          </h2>
+          <p class="contact-body reveal" style="transition-delay:160ms">
+            We work with a select number of founders each year to ensure every
+            engagement receives genuine investment and our full commitment.
+            We welcome an initial conversation at your convenience.
+          </p>
+          <div class="contact-links reveal" style="transition-delay:220ms">
+            <a href="mailto:hello@gsrassociates.com" class="contact-link" target="_blank" rel="noopener">
+              <div class="cl-left">
+                <span class="cl-type">Email</span>
+                <span class="cl-val">hello@gsrassociates.com</span>
+              </div>
+              <span class="cl-arrow">↗</span>
+            </a>
+            <a href="https://gsrassociates.com" class="contact-link" target="_blank" rel="noopener">
+              <div class="cl-left">
+                <span class="cl-type">Website</span>
+                <span class="cl-val">gsrassociates.com</span>
+              </div>
+              <span class="cl-arrow">↗</span>
+            </a>
+            <a href="https://linkedin.com" class="contact-link" target="_blank" rel="noopener">
+              <div class="cl-left">
+                <span class="cl-type">LinkedIn</span>
+                <span class="cl-val">GSR &amp; Associates</span>
+              </div>
+              <span class="cl-arrow">↗</span>
+            </a>
+            <a href="tel:+1234567890" class="contact-link" target="_blank" rel="noopener">
+              <div class="cl-left">
+                <span class="cl-type">Schedule a Call</span>
+                <span class="cl-val">Request a time that suits you</span>
+              </div>
+              <span class="cl-arrow">↗</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="avail-card reveal" style="transition-delay:160ms">
+          <div class="avail-status">
+            <div class="avail-dot"></div>
+            <span class="avail-label">Accepting Partners</span>
+          </div>
+          <div class="avail-title">Select engagements only</div>
+          <p class="avail-body">
+            GSR &amp; Associates limits active partnerships to ensure each
+            founder receives dedicated attention, genuine investment, and
+            measurable outcomes. Spaces are limited each year.
+          </p>
+          <a href="mailto:hello@gsrassociates.com" class="avail-cta">Request an Introduction</a>
+          <p class="avail-meta">No commitment. We'll respond within 48 hours.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="footer">
+    <span class="footer-logo">GSR <em>&</em> Associates</span>
+    <span class="footer-note">Growing Leaders, Scaling Vision, Together.</span>
+  </footer>
+
+  <script>
+    // Scroll-triggered reveal — clean IntersectionObserver, no snap, no timers
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target); // fire once only
+        }
+      });
+    }, { threshold: 0.15 });
+
+    // Observe all .reveal elements
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Hero elements are visible immediately on load
+    document.querySelectorAll('#hero .reveal').forEach(el => {
+      setTimeout(() => el.classList.add('visible'), parseInt(el.style.transitionDelay || '0'));
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
