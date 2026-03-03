@@ -6,1131 +6,1125 @@
   <title>GSR &amp; Associates — Growing Leaders, Scaling Vision</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <!--
+    DM Serif Display  — elegant, confident display serif with real presence
+    Plus Jakarta Sans — clean humanist sans, highly readable at all sizes
+    JetBrains Mono    — for counters and labels
+  -->
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
-    /* ─── RESET ─────────────────────────────────────── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { -webkit-text-size-adjust: 100%; overflow-x: hidden; scroll-behavior: smooth; }
-
-    /* ─── TOKENS ────────────────────────────────────── */
-    :root {
-      --bg:        #0f0f0f;
-      --bg-raised: #161616;
-      --bg-card:   #1c1c1c;
-      --line:      #2a2a2a;
-      --line-mid:  #333333;
-      --text:      #e8e4dc;       /* warm off-white — easier on eyes than pure white */
-      --text-mid:  #a09890;       /* secondary */
-      --text-dim:  #6b6460;       /* labels, captions */
-      --amber:     #c8923a;       /* the accent — brass, not orange */
-      --amber-lt:  #dba95c;
-      --amber-bg:  rgba(200,146,58,0.08);
-      --white:     #ffffff;
-
-      --display: 'Syne', sans-serif;           /* geometric, confident, contemporary */
-      --body:    'Instrument Sans', sans-serif; /* warm, readable, humanist */
-      --serif:   'Instrument Serif', serif;     /* for pull-quotes and accents */
-
-      --nav-h: 64px;
-      --section-pad: 120px;
-      --max: 1120px;
-    }
-
-    /* ─── BASE ──────────────────────────────────────── */
-    body {
-      font-family: var(--body);
-      background: var(--bg);
-      color: var(--text);
-      overflow-x: hidden;
-      line-height: 1.6;
-      /* subtle noise grain — barely there, but adds depth */
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
-    }
-
-    /* ─── NAV ───────────────────────────────────────── */
-    #nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      height: var(--nav-h);
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 48px;
-      border-bottom: 1px solid var(--line);
-      background: rgba(15,15,15,0.92);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      transition: border-color 0.3s;
-    }
-    .nav-logo {
-      font-family: var(--display);
-      font-size: 0.88rem;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--text);
-    }
-    .nav-logo em {
-      font-style: normal;
-      color: var(--amber);
-    }
-    .nav-cta {
-      font-family: var(--body);
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      color: var(--bg);
-      background: var(--amber);
-      border: none;
-      padding: 9px 22px;
-      cursor: pointer;
-      transition: background 0.2s, transform 0.15s;
-      text-decoration: none;
-      display: inline-block;
-    }
-    .nav-cta:hover { background: var(--amber-lt); transform: translateY(-1px); }
-
-    /* ─── SECTIONS SHARED ───────────────────────────── */
-    section {
-      padding: var(--section-pad) 48px;
-      max-width: 100%;
-      overflow: hidden;
-    }
-    .inner {
-      max-width: var(--max);
-      margin: 0 auto;
-    }
-
-    /* Reveal animation */
-    .reveal {
-      opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 0.75s cubic-bezier(0.16,1,0.3,1),
-                  transform 0.75s cubic-bezier(0.16,1,0.3,1);
-    }
-    .reveal.visible { opacity: 1; transform: none; }
-    @media (prefers-reduced-motion: reduce) {
-      .reveal { opacity: 1 !important; transform: none !important; }
-    }
-
-    /* Section label */
-    .label {
-      font-family: var(--display);
-      font-size: 0.65rem;
-      font-weight: 600;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: var(--amber);
-      margin-bottom: 24px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .label::before {
-      content: '';
-      width: 24px; height: 1px;
-      background: var(--amber);
-      flex-shrink: 0;
-    }
-
-    /* ═══════════════════════════════════════════════
-       HERO
-    ═══════════════════════════════════════════════ */
-    #hero {
-      min-height: 100dvh;
-      padding: 0 48px;
-      display: flex;
-      align-items: center;
-      border-bottom: 1px solid var(--line);
-      position: relative;
-    }
-
-    /* Geometric accent — large background character */
-    #hero::before {
-      content: 'GSR';
-      position: absolute;
-      right: -20px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-family: var(--display);
-      font-size: clamp(18rem, 28vw, 36rem);
-      font-weight: 800;
-      color: transparent;
-      -webkit-text-stroke: 1px rgba(255,255,255,0.03);
-      line-height: 1;
-      pointer-events: none;
-      user-select: none;
-      letter-spacing: -0.04em;
-    }
-
-    .hero-inner {
-      max-width: var(--max);
-      margin: 0 auto;
-      width: 100%;
-      padding-top: var(--nav-h);
-      display: grid;
-      grid-template-columns: 1fr 340px;
-      gap: 80px;
-      align-items: center;
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero-left {}
-
-    .hero-label {
-      font-family: var(--display);
-      font-size: 0.65rem;
-      font-weight: 600;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: var(--amber);
-      margin-bottom: 32px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .hero-label::before {
-      content: '';
-      width: 24px; height: 1px;
-      background: var(--amber);
-    }
-
-    .hero-h1 {
-      font-family: var(--display);
-      font-size: clamp(3rem, 6.5vw, 6rem);
-      font-weight: 800;
-      line-height: 1.0;
-      letter-spacing: -0.03em;
-      color: var(--text);
-      margin-bottom: 32px;
-    }
-    .hero-h1 .accent {
-      color: var(--amber);
-      font-style: italic;
-      font-family: var(--serif);
-      font-weight: 400;
-      font-size: 1.05em;
-      letter-spacing: -0.02em;
-    }
-
-    .hero-body {
-      font-size: clamp(1rem, 1.5vw, 1.15rem);
-      color: var(--text-mid);
-      line-height: 1.8;
-      max-width: 520px;
-      margin-bottom: 44px;
-    }
-
-    .hero-actions {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-    .btn-primary {
-      font-family: var(--body);
-      font-size: 0.88rem;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      color: var(--bg);
-      background: var(--amber);
-      border: none;
-      padding: 14px 32px;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-block;
-      transition: background 0.2s, transform 0.15s;
-    }
-    .btn-primary:hover { background: var(--amber-lt); transform: translateY(-1px); }
-
-    .btn-ghost {
-      font-family: var(--body);
-      font-size: 0.88rem;
-      font-weight: 500;
-      letter-spacing: 0.04em;
-      color: var(--text-mid);
-      background: none;
-      border: 1px solid var(--line-mid);
-      padding: 13px 28px;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-block;
-      transition: border-color 0.2s, color 0.2s;
-    }
-    .btn-ghost:hover { border-color: var(--amber); color: var(--amber); }
-
-    /* Hero right — stats panel */
-    .hero-stats {
-      background: var(--bg-card);
-      border: 1px solid var(--line);
-      padding: 40px 36px;
-    }
-
-    .hero-stat {
-      padding: 20px 0;
-      border-bottom: 1px solid var(--line);
-    }
-    .hero-stat:first-child { padding-top: 0; }
-    .hero-stat:last-child { border-bottom: none; padding-bottom: 0; }
-
-    .stat-label {
-      font-family: var(--display);
-      font-size: 0.6rem;
-      font-weight: 600;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--text-dim);
-      margin-bottom: 6px;
-    }
-    .stat-val {
-      font-family: var(--display);
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--text);
-      line-height: 1.1;
-    }
-    .stat-val.amber { color: var(--amber); }
-    .stat-note {
-      font-size: 0.78rem;
-      color: var(--text-dim);
-      margin-top: 4px;
-      line-height: 1.4;
-    }
-
-    /* Scroll indicator */
-    .hero-scroll {
-      position: absolute;
-      bottom: 36px;
-      left: 48px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-family: var(--display);
-      font-size: 0.6rem;
-      font-weight: 600;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--text-dim);
-    }
-    .scroll-line {
-      width: 40px; height: 1px;
-      background: var(--line-mid);
-      position: relative;
-      overflow: hidden;
-    }
-    .scroll-line::after {
-      content: '';
-      position: absolute;
-      top: 0; left: -100%;
-      width: 100%; height: 100%;
-      background: var(--amber);
-      animation: slide-line 2s ease-in-out infinite;
-    }
-    @keyframes slide-line {
-      0%   { left: -100%; }
-      50%  { left: 0%; }
-      100% { left: 100%; }
-    }
-
-    /* ═══════════════════════════════════════════════
-       MISSION
-    ═══════════════════════════════════════════════ */
-    #mission {
-      background: var(--bg);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .mission-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 100px;
-      align-items: start;
-    }
-
-    .mission-left h2 {
-      font-family: var(--display);
-      font-size: clamp(2.4rem, 4.5vw, 4rem);
-      font-weight: 700;
-      line-height: 1.05;
-      letter-spacing: -0.03em;
-      color: var(--text);
-      margin-bottom: 28px;
-    }
-    .mission-left h2 em {
-      font-family: var(--serif);
-      font-style: italic;
-      font-weight: 400;
-      color: var(--amber);
-      letter-spacing: -0.01em;
-      font-size: 1.05em;
-    }
-
-    .mission-body {
-      font-size: clamp(0.95rem, 1.4vw, 1.08rem);
-      color: var(--text-mid);
-      line-height: 1.85;
-      margin-bottom: 32px;
-    }
-
-    .mission-quote {
-      font-family: var(--serif);
-      font-style: italic;
-      font-size: clamp(1.1rem, 1.6vw, 1.3rem);
-      color: var(--text);
-      line-height: 1.65;
-      padding-left: 24px;
-      border-left: 1px solid var(--amber);
-    }
-
-    /* Pillars — right side */
-    .pillars { display: flex; flex-direction: column; }
-
-    .pillar {
-      display: grid;
-      grid-template-columns: 32px 1fr;
-      gap: 20px;
-      padding: 24px 0;
-      border-bottom: 1px solid var(--line);
-      align-items: start;
-      transition: border-color 0.2s;
-    }
-    .pillar:first-child { border-top: 1px solid var(--line); }
-    .pillar:hover { border-bottom-color: var(--amber); }
-
-    .pillar-n {
-      font-family: var(--display);
-      font-size: 0.62rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      color: var(--amber);
-      padding-top: 3px;
-    }
-    .pillar-name {
-      font-family: var(--body);
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 5px;
-    }
-    .pillar-desc {
-      font-size: 0.85rem;
-      color: var(--text-mid);
-      line-height: 1.6;
-    }
-
-    /* ═══════════════════════════════════════════════
-       CHALLENGE
-    ═══════════════════════════════════════════════ */
-    #challenge {
-      background: var(--bg-raised);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .challenge-grid {
-      display: grid;
-      grid-template-columns: 400px 1fr;
-      gap: 100px;
-      align-items: start;
-    }
-
-    .challenge-left h2 {
-      font-family: var(--display);
-      font-size: clamp(2.4rem, 4.5vw, 4rem);
-      font-weight: 700;
-      line-height: 1.05;
-      letter-spacing: -0.03em;
-      color: var(--text);
-      margin-bottom: 24px;
-    }
-    .challenge-left h2 em {
-      font-family: var(--serif);
-      font-style: italic;
-      font-weight: 400;
-      color: var(--amber);
-      font-size: 1.05em;
-    }
-
-    .challenge-body {
-      font-size: clamp(0.92rem, 1.3vw, 1.02rem);
-      color: var(--text-mid);
-      line-height: 1.85;
-    }
-
-    .challenge-items { display: flex; flex-direction: column; padding-top: 8px; }
-
-    .ch-item {
-      display: flex;
-      gap: 20px;
-      align-items: flex-start;
-      padding: 22px 0;
-      border-bottom: 1px solid var(--line);
-    }
-    .ch-item:first-child { border-top: 1px solid var(--line); }
-
-    .ch-num {
-      font-family: var(--display);
-      font-size: 0.58rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      color: var(--amber);
-      padding-top: 4px;
-      flex-shrink: 0;
-      width: 24px;
-    }
-    .ch-text {
-      font-size: clamp(0.95rem, 1.3vw, 1.05rem);
-      font-weight: 500;
-      color: var(--text);
-      line-height: 1.5;
-    }
-    .ch-sub {
-      font-size: 0.82rem;
-      color: var(--text-mid);
-      margin-top: 4px;
-      line-height: 1.55;
-    }
-
-    /* ═══════════════════════════════════════════════
-       MODEL
-    ═══════════════════════════════════════════════ */
-    #model {
-      background: var(--bg);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .model-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 100px;
-      align-items: start;
-    }
-
-    .model-left h2 {
-      font-family: var(--display);
-      font-size: clamp(2.4rem, 4.5vw, 4rem);
-      font-weight: 700;
-      line-height: 1.05;
-      letter-spacing: -0.03em;
-      color: var(--text);
-      margin-bottom: 24px;
-    }
-    .model-left h2 em {
-      font-family: var(--serif);
-      font-style: italic;
-      font-weight: 400;
-      color: var(--amber);
-      font-size: 1.05em;
-    }
-
-    .model-body {
-      font-size: clamp(0.92rem, 1.3vw, 1.02rem);
-      color: var(--text-mid);
-      line-height: 1.85;
-      margin-bottom: 28px;
-    }
-
-    .model-quote {
-      background: var(--amber-bg);
-      border-left: 2px solid var(--amber);
-      padding: 20px 24px;
-      font-family: var(--serif);
-      font-style: italic;
-      font-size: clamp(1rem, 1.4vw, 1.15rem);
-      color: var(--text);
-      line-height: 1.65;
-    }
-
-    /* Timeline */
-    .tl-head {
-      font-family: var(--display);
-      font-size: 0.6rem;
-      font-weight: 600;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--text-dim);
-      margin-bottom: 20px;
-      padding-bottom: 16px;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .tl { display: flex; flex-direction: column; }
-
-    .tl-row {
-      display: grid;
-      grid-template-columns: 100px 1fr;
-      gap: 20px;
-      padding: 18px 0;
-      border-bottom: 1px solid var(--line);
-      align-items: baseline;
-      transition: background 0.15s;
-    }
-    .tl-row:first-child { border-top: 1px solid var(--line); }
-    .tl-row:hover { background: rgba(200,146,58,0.04); }
-
-    .tl-period {
-      font-family: var(--display);
-      font-size: 0.6rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--amber);
-    }
-    .tl-act {
-      font-size: 0.95rem;
-      font-weight: 500;
-      color: var(--text);
-    }
-
-    /* ═══════════════════════════════════════════════
-       SERVICES
-    ═══════════════════════════════════════════════ */
-    #services {
-      background: var(--bg-raised);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .services-head {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      margin-bottom: 56px;
-      padding-bottom: 32px;
-      border-bottom: 1px solid var(--line);
-      gap: 32px;
-    }
-
-    .services-head h2 {
-      font-family: var(--display);
-      font-size: clamp(2.4rem, 4.5vw, 4rem);
-      font-weight: 700;
-      line-height: 1.0;
-      letter-spacing: -0.03em;
-      color: var(--text);
-    }
-
-    .services-intro {
-      max-width: 360px;
-      font-size: 0.92rem;
-      color: var(--text-mid);
-      line-height: 1.7;
-      text-align: right;
-    }
-
-    .services-cols {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2px;
-      background: var(--line);
-    }
-
-    .svc-col {
-      background: var(--bg-card);
-      padding: 44px 40px;
-    }
-
-    .svc-title {
-      font-family: var(--display);
-      font-size: 1.25rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      color: var(--text);
-      margin-bottom: 32px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid var(--line);
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .svc-title::before {
-      content: '';
-      width: 6px; height: 6px;
-      background: var(--amber);
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-
-    .svc-items { display: flex; flex-direction: column; }
-
-    .svc-item {
-      padding: 14px 0;
-      border-bottom: 1px solid var(--line);
-      font-size: clamp(0.88rem, 1.2vw, 0.96rem);
-      color: var(--text-mid);
-      line-height: 1.55;
-      display: flex;
-      gap: 14px;
-      align-items: flex-start;
-      transition: color 0.15s;
-    }
-    .svc-item:last-child { border-bottom: none; }
-    .svc-item:hover { color: var(--text); }
-    .svc-item::before {
-      content: '→';
-      color: var(--amber);
-      flex-shrink: 0;
-      font-size: 0.85rem;
-      margin-top: 1px;
-    }
-
-    /* ═══════════════════════════════════════════════
-       CONTACT
-    ═══════════════════════════════════════════════ */
-    #contact {
-      background: var(--bg);
-      border-top: none;
-    }
-
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 420px;
-      gap: 100px;
-      align-items: start;
-    }
-
-    .contact-left h2 {
-      font-family: var(--display);
-      font-size: clamp(2.8rem, 5.5vw, 5rem);
-      font-weight: 800;
-      line-height: 1.0;
-      letter-spacing: -0.04em;
-      color: var(--text);
-      margin-bottom: 28px;
-    }
-    .contact-left h2 em {
-      font-family: var(--serif);
-      font-style: italic;
-      font-weight: 400;
-      color: var(--amber);
-      font-size: 1.05em;
-      letter-spacing: -0.02em;
-    }
-
-    .contact-body {
-      font-size: clamp(0.95rem, 1.4vw, 1.08rem);
-      color: var(--text-mid);
-      line-height: 1.8;
-      max-width: 480px;
-      margin-bottom: 48px;
-    }
-
-    .contact-links { display: flex; flex-direction: column; }
-
-    .contact-link {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 18px 0;
-      border-bottom: 1px solid var(--line);
-      text-decoration: none;
-      transition: border-color 0.2s;
-      gap: 16px;
-    }
-    .contact-link:first-child { border-top: 1px solid var(--line); }
-    .contact-link:hover { border-bottom-color: var(--amber); }
-    .contact-link:hover .cl-val { color: var(--amber); }
-    .contact-link:hover .cl-arrow { transform: translate(3px, -3px); color: var(--amber); }
-
-    .cl-left { display: flex; flex-direction: column; gap: 3px; }
-    .cl-type {
-      font-family: var(--display);
-      font-size: 0.58rem;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--text-dim);
-    }
-    .cl-val {
-      font-size: 0.95rem;
-      font-weight: 500;
-      color: var(--text);
-      transition: color 0.2s;
-    }
-    .cl-arrow {
-      font-size: 1.1rem;
-      color: var(--text-dim);
-      transition: transform 0.2s, color 0.2s;
-    }
-
-    /* Right side — availability card */
-    .avail-card {
-      background: var(--bg-card);
-      border: 1px solid var(--line);
-      padding: 40px;
-      position: sticky;
-      top: calc(var(--nav-h) + 32px);
-    }
-
-    .avail-status {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 24px;
-    }
-    .avail-dot {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: #4ade80;
-      animation: pulse-dot 2.5s ease-in-out infinite;
-    }
-    @keyframes pulse-dot {
-      0%,100% { opacity: 1; box-shadow: 0 0 0 0 rgba(74,222,128,0.4); }
-      50%      { opacity: 0.8; box-shadow: 0 0 0 6px rgba(74,222,128,0); }
-    }
-    .avail-label {
-      font-family: var(--display);
-      font-size: 0.62rem;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: #4ade80;
-    }
-
-    .avail-title {
-      font-family: var(--display);
-      font-size: 1.4rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      color: var(--text);
-      margin-bottom: 14px;
-      line-height: 1.2;
-    }
-
-    .avail-body {
-      font-size: 0.88rem;
-      color: var(--text-mid);
-      line-height: 1.7;
-      margin-bottom: 32px;
-    }
-
-    .avail-cta {
-      display: block;
-      width: 100%;
-      padding: 14px 24px;
-      background: var(--amber);
-      color: var(--bg);
-      border: none;
-      font-family: var(--body);
-      font-size: 0.82rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      text-align: center;
-      text-decoration: none;
-      cursor: pointer;
-      transition: background 0.2s, transform 0.15s;
-    }
-    .avail-cta:hover { background: var(--amber-lt); transform: translateY(-1px); }
-
-    .avail-meta {
-      margin-top: 20px;
-      font-size: 0.76rem;
-      color: var(--text-dim);
-      line-height: 1.5;
-      text-align: center;
-    }
-
-    /* ─── FOOTER ────────────────────────────────────── */
-    #footer {
-      padding: 32px 48px;
-      border-top: 1px solid var(--line);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: var(--bg);
-    }
-    .footer-logo {
-      font-family: var(--display);
-      font-size: 0.8rem;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--text-dim);
-    }
-    .footer-logo em { font-style: normal; color: var(--amber); }
-    .footer-note {
-      font-size: 0.75rem;
-      color: var(--text-dim);
-    }
-
-    /* ─── RESPONSIVE ────────────────────────────────── */
-    @media (max-width: 1024px) {
-      :root { --section-pad: 80px; }
-      #nav { padding: 0 32px; }
-      section { padding: var(--section-pad) 32px; }
-      #hero { padding: 0 32px; }
-      #footer { padding: 28px 32px; }
-
-      .hero-inner { grid-template-columns: 1fr; gap: 48px; padding-top: calc(var(--nav-h) + 40px); }
-      .hero-stats { display: grid; grid-template-columns: repeat(2, 1fr); }
-      .hero-stat { padding: 16px; border-bottom: none; border-right: 1px solid var(--line); }
-      .hero-stat:nth-child(even) { border-right: none; }
-      #hero::before { display: none; }
-      .hero-scroll { left: 32px; }
-
-      .mission-grid,
-      .challenge-grid,
-      .model-grid { grid-template-columns: 1fr; gap: 56px; }
-      .challenge-grid { grid-template-columns: 1fr; }
-
-      .services-head { flex-direction: column; align-items: flex-start; }
-      .services-intro { text-align: left; max-width: 100%; }
-
-      .contact-grid { grid-template-columns: 1fr; gap: 56px; }
-      .avail-card { position: static; }
-    }
-
-    @media (max-width: 600px) {
-      :root { --nav-h: 52px; --section-pad: 60px; }
-      #nav { padding: 0 20px; }
-      .nav-logo { font-size: 0.78rem; }
-      .nav-cta { padding: 7px 14px; font-size: 0.72rem; }
-
-      section { padding: var(--section-pad) 20px; }
-      #hero { padding: 0 20px; min-height: auto; padding-bottom: 60px; }
-      #footer { padding: 24px 20px; flex-direction: column; gap: 12px; text-align: center; }
-
-      .hero-inner { gap: 36px; padding-top: calc(var(--nav-h) + 32px); }
-      .hero-h1 { font-size: clamp(2.6rem, 11vw, 4rem); }
-      .hero-actions { flex-direction: column; align-items: flex-start; gap: 12px; }
-      .btn-primary, .btn-ghost { width: 100%; text-align: center; }
-      .hero-stats { grid-template-columns: 1fr 1fr; }
-      .hero-stat { padding: 12px; }
-      .hero-scroll { display: none; }
-
-      .mission-grid,
-      .challenge-grid,
-      .model-grid { gap: 40px; }
-
-      .services-head { margin-bottom: 32px; }
-      .services-cols { grid-template-columns: 1fr; }
-      .svc-col { padding: 28px 24px; }
-
-      .contact-left h2 { font-size: clamp(2.4rem, 10vw, 3.5rem); }
-      .avail-card { padding: 28px 24px; }
-    }
-
-    @media (max-width: 380px) {
-      section { padding: 48px 16px; }
-      #hero { padding: 0 16px; }
-      .hero-h1 { font-size: 2.4rem; }
-    }
+/* ═══════════════════════════════════════════════════════════
+   RESET & TOKENS
+═══════════════════════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
+}
+
+:root {
+  --bg:         #0d0d0d;
+  --bg-mid:     #131313;
+  --bg-card:    #1a1a1a;
+  --bg-card2:   #202020;
+  --line:       #252525;
+  --line-lt:    #303030;
+  --text:       #ede9e1;      /* warm white — easy to read for a long time */
+  --text-2:     #9e9890;      /* secondary */
+  --text-3:     #635f5a;      /* labels */
+  --gold:       #c8923a;      /* brass accent */
+  --gold-lt:    #dba95c;
+  --gold-dim:   rgba(200,146,58,0.12);
+  --green:      #3fb37a;
+
+  /* Fonts */
+  --serif:  'DM Serif Display', Georgia, serif;
+  --sans:   'Plus Jakarta Sans', system-ui, sans-serif;
+  --mono:   'JetBrains Mono', monospace;
+
+  --nav-h:    60px;
+  --prog-h:   3px;
+  --slide-pad: 80px;
+  --max-w:    1140px;
+}
+
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--text);
+  overflow: hidden;         /* deck handles all scroll */
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   NAVBAR
+═══════════════════════════════════════════════════════════ */
+#nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  height: var(--nav-h);
+  background: rgba(13,13,13,0.94);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--line);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 52px;
+}
+
+.nav-brand {
+  display: flex; align-items: center; gap: 14px;
+}
+.nav-mark {
+  width: 34px; height: 34px;
+  border: 1px solid var(--gold);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.nav-mark span {
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  font-weight: 500;
+  color: var(--gold);
+  letter-spacing: 0.05em;
+}
+.nav-wordmark {
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+.nav-right {
+  display: flex; align-items: center; gap: 28px;
+}
+#slide-counter {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--text-3);
+  letter-spacing: 0.1em;
+}
+#export-btn {
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  color: var(--text);
+  background: transparent;
+  border: 1px solid var(--line-lt);
+  padding: 7px 18px;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+#export-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+/* Progress bar */
+#progress {
+  position: fixed; top: var(--nav-h); left: 0; right: 0; z-index: 199;
+  height: var(--prog-h);
+  background: var(--line);
+}
+#progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold), var(--gold-lt));
+  width: 0%;
+  transition: width 0.45s cubic-bezier(0.4,0,0.2,1);
+  box-shadow: 0 0 12px rgba(200,146,58,0.5);
+}
+
+/* Slide counter dots — desktop only */
+#dot-nav {
+  position: fixed;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 150;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--line-lt);
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+.dot.active { background: var(--gold); transform: scale(1.4); }
+.dot:hover  { background: var(--gold-lt); }
+
+/* Keyboard hint */
+#kbd-hint {
+  position: fixed;
+  bottom: 28px; left: 50%;
+  transform: translateX(-50%);
+  z-index: 150;
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  color: var(--text-3);
+  pointer-events: none;
+  transition: opacity 0.5s;
+}
+#kbd-hint kbd {
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 1px solid var(--line-lt);
+  padding: 3px 7px;
+  border-radius: 3px;
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  color: var(--text-3);
+}
+#kbd-hint.hidden { opacity: 0; }
+
+/* ═══════════════════════════════════════════════════════════
+   DECK — snap-scroll container
+═══════════════════════════════════════════════════════════ */
+#deck {
+  position: fixed;
+  top: calc(var(--nav-h) + var(--prog-h));
+  left: 0; right: 0;
+  bottom: 0;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   BASE SLIDE
+═══════════════════════════════════════════════════════════ */
+.slide {
+  width: 100%;
+  height: 100%;          /* fills the fixed deck viewport */
+  scroll-snap-align: start;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--slide-pad) 52px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* inner content container */
+.slide-inner {
+  width: 100%;
+  max-width: var(--max-w);
+  position: relative;
+  z-index: 1;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SHARED COMPONENTS
+═══════════════════════════════════════════════════════════ */
+
+/* Section eyebrow label */
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 0.64rem;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 22px;
+}
+.eyebrow::before {
+  content: '';
+  width: 20px; height: 1px;
+  background: var(--gold);
+  flex-shrink: 0;
+}
+
+/* Divider */
+.hdivide {
+  width: 48px; height: 1px;
+  background: var(--gold);
+  margin: 28px 0;
+}
+
+/* Scroll cue on dark slides */
+.scroll-cue {
+  position: absolute;
+  bottom: 32px; left: 52px;
+  display: flex; align-items: center; gap: 12px;
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  pointer-events: none;
+}
+.scroll-cue-line {
+  width: 36px; height: 1px; background: var(--line-lt);
+  position: relative; overflow: hidden;
+}
+.scroll-cue-line::after {
+  content: '';
+  position: absolute; top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: var(--gold);
+  animation: scan 2s ease-in-out infinite;
+}
+@keyframes scan { 0%{left:-100%} 50%{left:0%} 100%{left:100%} }
+
+/* ═══════════════════════════════════════════════════════════
+   ENTRANCE ANIMATIONS
+═══════════════════════════════════════════════════════════ */
+[data-a] {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1),
+              transform 0.7s cubic-bezier(0.16,1,0.3,1);
+}
+.slide.in [data-a]            { opacity: 1; transform: none; }
+.slide.in [data-a][data-d="1"]{ transition-delay: 80ms; }
+.slide.in [data-a][data-d="2"]{ transition-delay: 170ms; }
+.slide.in [data-a][data-d="3"]{ transition-delay: 260ms; }
+.slide.in [data-a][data-d="4"]{ transition-delay: 350ms; }
+.slide.in [data-a][data-d="5"]{ transition-delay: 440ms; }
+@media (prefers-reduced-motion: reduce) {
+  [data-a] { opacity:1 !important; transform:none !important; transition:none !important; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SLIDE 1 — HERO
+═══════════════════════════════════════════════════════════ */
+.slide-hero {
+  background: var(--bg);
+  align-items: stretch;
+  padding: 0;
+}
+
+.hero-layout {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+}
+
+.hero-main {
+  padding: var(--slide-pad) 52px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-right: 1px solid var(--line);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Large watermark letter */
+.hero-main::before {
+  content: 'G';
+  position: absolute;
+  right: -40px; bottom: -60px;
+  font-family: var(--serif);
+  font-size: 40vw;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(200,146,58,0.06);
+  pointer-events: none;
+  user-select: none;
+}
+
+.hero-tag {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 36px;
+}
+.hero-tag::before { content:''; width:20px; height:1px; background:var(--gold); }
+
+.hero-h1 {
+  font-family: var(--serif);
+  font-size: clamp(3rem, 5.8vw, 5.8rem);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--text);
+  margin-bottom: 28px;
+  letter-spacing: -0.01em;
+}
+.hero-h1 em {
+  font-style: italic;
+  color: var(--gold-lt);
+}
+
+.hero-body {
+  font-size: clamp(1rem, 1.4vw, 1.1rem);
+  color: var(--text-2);
+  line-height: 1.85;
+  max-width: 540px;
+  margin-bottom: 44px;
+  font-weight: 300;
+}
+
+.hero-actions {
+  display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+}
+.btn-fill {
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--bg);
+  background: var(--gold);
+  border: none;
+  padding: 13px 30px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-fill:hover { background: var(--gold-lt); transform: translateY(-1px); }
+
+.btn-outline {
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--text-2);
+  background: transparent;
+  border: 1px solid var(--line-lt);
+  padding: 12px 26px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: border-color 0.2s, color 0.2s;
+}
+.btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+/* Hero right panel — stats */
+.hero-panel {
+  background: var(--bg-mid);
+  padding: 56px 44px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0;
+}
+
+.h-stat {
+  padding: 22px 0;
+  border-bottom: 1px solid var(--line);
+}
+.h-stat:first-child { padding-top: 0; }
+.h-stat:last-child  { border-bottom: none; padding-bottom: 0; }
+
+.h-stat-label {
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: 7px;
+}
+.h-stat-val {
+  font-family: var(--serif);
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: var(--text);
+  line-height: 1.1;
+}
+.h-stat-val.gold { color: var(--gold-lt); }
+.h-stat-note {
+  font-size: 0.78rem;
+  color: var(--text-3);
+  margin-top: 4px;
+  font-weight: 300;
+}
+.hero-panel-cta {
+  margin-top: 36px;
+  display: block;
+  width: 100%;
+  padding: 13px 24px;
+  background: var(--gold);
+  color: var(--bg);
+  border: none;
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.2s;
+  text-decoration: none;
+}
+.hero-panel-cta:hover { background: var(--gold-lt); }
+
+/* ═══════════════════════════════════════════════════════════
+   SLIDE 2 — MISSION
+═══════════════════════════════════════════════════════════ */
+.slide-mission { background: var(--bg-mid); }
+
+.mission-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.mission-left h2 {
+  font-family: var(--serif);
+  font-size: clamp(2.4rem, 4.2vw, 4rem);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--text);
+  margin-bottom: 24px;
+}
+.mission-left h2 em { font-style: italic; color: var(--gold-lt); }
+
+.mission-body {
+  font-size: clamp(0.95rem, 1.3vw, 1.06rem);
+  color: var(--text-2);
+  line-height: 1.85;
+  margin-bottom: 28px;
+  font-weight: 300;
+}
+.mission-pull {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+  color: var(--text);
+  line-height: 1.6;
+  padding-left: 20px;
+  border-left: 1px solid var(--gold);
+}
+
+.pillars { display: flex; flex-direction: column; }
+.pillar {
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  gap: 20px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--line);
+  align-items: start;
+}
+.pillar:first-child { border-top: 1px solid var(--line); }
+.pil-n {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  font-weight: 500;
+  color: var(--gold);
+  letter-spacing: 0.08em;
+  padding-top: 2px;
+}
+.pil-title {
+  font-size: 0.93rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 4px;
+  letter-spacing: 0.01em;
+}
+.pil-desc {
+  font-size: 0.83rem;
+  color: var(--text-2);
+  line-height: 1.6;
+  font-weight: 300;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SLIDE 3 — CHALLENGE
+═══════════════════════════════════════════════════════════ */
+.slide-challenge { background: var(--bg); }
+
+.challenge-grid {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.challenge-left h2 {
+  font-family: var(--serif);
+  font-size: clamp(2.4rem, 4.2vw, 4rem);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--text);
+  margin-bottom: 24px;
+}
+.challenge-left h2 em { font-style: italic; color: var(--gold-lt); }
+.challenge-body {
+  font-size: clamp(0.9rem, 1.25vw, 1rem);
+  color: var(--text-2);
+  line-height: 1.85;
+  font-weight: 300;
+}
+
+.ch-list { display: flex; flex-direction: column; }
+.ch-item {
+  display: flex;
+  gap: 20px;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--line);
+  align-items: flex-start;
+  transition: background 0.15s;
+}
+.ch-item:first-child { border-top: 1px solid var(--line); }
+.ch-num {
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  font-weight: 500;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+  padding-top: 3px;
+  flex-shrink: 0;
+  width: 22px;
+}
+.ch-title {
+  font-size: clamp(0.92rem, 1.25vw, 1rem);
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 5px;
+}
+.ch-sub {
+  font-size: 0.82rem;
+  color: var(--text-2);
+  line-height: 1.6;
+  font-weight: 300;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SLIDE 4 — MODEL
+═══════════════════════════════════════════════════════════ */
+.slide-model { background: var(--bg-mid); }
+
+.model-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.model-left h2 {
+  font-family: var(--serif);
+  font-size: clamp(2.4rem, 4.2vw, 4rem);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--text);
+  margin-bottom: 24px;
+}
+.model-left h2 em { font-style: italic; color: var(--gold-lt); }
+.model-body {
+  font-size: clamp(0.9rem, 1.25vw, 1rem);
+  color: var(--text-2);
+  line-height: 1.85;
+  margin-bottom: 24px;
+  font-weight: 300;
+}
+.model-quote {
+  background: var(--gold-dim);
+  border-left: 2px solid var(--gold);
+  padding: 18px 22px;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(1rem, 1.4vw, 1.18rem);
+  color: var(--text);
+  line-height: 1.65;
+}
+
+.tl-head {
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line);
+}
+.tl { display: flex; flex-direction: column; }
+.tl-row {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+  align-items: baseline;
+}
+.tl-row:first-child { border-top: 1px solid var(--line); }
+.tl-period {
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.tl-act {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SLIDE 5 — SERVICES
+═══════════════════════════════════════════════════════════ */
+.slide-services { background: var(--bg); }
+
+.services-top {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding-bottom: 36px;
+  margin-bottom: 36px;
+  border-bottom: 1px solid var(--line);
+  gap: 40px;
+}
+.services-top h2 {
+  font-family: var(--serif);
+  font-size: clamp(2.4rem, 4.2vw, 4rem);
+  font-weight: 400;
+  color: var(--text);
+  line-height: 1.05;
+  flex-shrink: 0;
+}
+.services-intro {
+  font-size: 0.92rem;
+  color: var(--text-2);
+  line-height: 1.75;
+  max-width: 360px;
+  text-align: right;
+  font-weight: 300;
+}
+
+.svc-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  background: var(--line);
+}
+.svc-col {
+  background: var(--bg-card);
+  padding: 40px 36px;
+}
+.svc-col-title {
+  font-family: var(--serif);
+  font-size: 1.45rem;
+  font-weight: 400;
+  color: var(--text);
+  margin-bottom: 28px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--line);
+  display: flex; align-items: center; gap: 10px;
+}
+.svc-col-title::before {
+  content: '';
+  width: 5px; height: 5px;
+  background: var(--gold);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.svc-items { display: flex; flex-direction: column; }
+.svc-item {
+  padding: 13px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.9rem;
+  color: var(--text-2);
+  line-height: 1.55;
+  display: flex; gap: 12px;
+  transition: color 0.15s;
+  font-weight: 300;
+}
+.svc-item:last-child { border-bottom: none; }
+.svc-item:hover { color: var(--text); }
+.svc-item::before { content:'→'; color:var(--gold); flex-shrink:0; font-size:0.82rem; }
+
+/* ═══════════════════════════════════════════════════════════
+   SLIDE 6 — CONTACT
+═══════════════════════════════════════════════════════════ */
+.slide-contact { background: var(--bg-mid); }
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 80px;
+  align-items: start;
+}
+
+.contact-left h2 {
+  font-family: var(--serif);
+  font-size: clamp(2.8rem, 5.2vw, 5rem);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--text);
+  margin-bottom: 20px;
+}
+.contact-left h2 em { font-style: italic; color: var(--gold-lt); }
+.contact-body {
+  font-size: clamp(0.95rem, 1.3vw, 1.06rem);
+  color: var(--text-2);
+  line-height: 1.85;
+  max-width: 480px;
+  margin-bottom: 44px;
+  font-weight: 300;
+}
+
+.c-links { display: flex; flex-direction: column; }
+.c-link {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+  text-decoration: none; gap: 16px;
+  transition: border-color 0.2s;
+}
+.c-link:first-child { border-top: 1px solid var(--line); }
+.c-link:hover { border-bottom-color: var(--gold); }
+.c-link:hover .c-val { color: var(--gold-lt); }
+.c-link:hover .c-arrow { transform: translate(3px,-3px); color: var(--gold); }
+.c-meta { display: flex; flex-direction: column; gap: 2px; }
+.c-type {
+  font-family: var(--mono);
+  font-size: 0.56rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.c-val {
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--text);
+  transition: color 0.2s;
+}
+.c-arrow {
+  font-size: 1.1rem;
+  color: var(--text-3);
+  transition: transform 0.2s, color 0.2s;
+  flex-shrink: 0;
+}
+
+/* Availability card */
+.avail {
+  background: var(--bg-card);
+  border: 1px solid var(--line-lt);
+  padding: 36px;
+}
+.avail-status {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 22px;
+}
+.avail-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--green);
+  animation: pdot 2.5s ease-in-out infinite;
+}
+@keyframes pdot {
+  0%,100%{ opacity:1; box-shadow:0 0 0 0 rgba(63,179,122,0.4); }
+  50%{ opacity:0.75; box-shadow:0 0 0 6px rgba(63,179,122,0); }
+}
+.avail-status-lbl {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--green);
+}
+.avail-title {
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  color: var(--text);
+  margin-bottom: 12px;
+  line-height: 1.25;
+}
+.avail-body {
+  font-size: 0.85rem;
+  color: var(--text-2);
+  line-height: 1.7;
+  margin-bottom: 28px;
+  font-weight: 300;
+}
+.avail-cta {
+  display: block; width: 100%;
+  padding: 14px 24px;
+  background: var(--gold);
+  color: var(--bg);
+  border: none;
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+.avail-cta:hover { background: var(--gold-lt); transform: translateY(-1px); }
+.avail-note {
+  margin-top: 14px;
+  font-size: 0.72rem;
+  color: var(--text-3);
+  text-align: center;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   PDF EXPORT STAGE
+═══════════════════════════════════════════════════════════ */
+body.exporting [data-a] {
+  opacity: 1 !important; transform: none !important; transition: none !important;
+}
+#pdf-stage {
+  position: fixed; left: -9999px; top: 0;
+  width: 1920px; height: 1080px; overflow: hidden;
+}
+#pdf-stage .slide {
+  width: 1920px !important;
+  height: 1080px !important;
+  scroll-snap-align: unset !important;
+  padding: 72px 100px !important;
+  align-items: center !important;
+}
+#pdf-stage .slide-hero { padding: 0 !important; align-items: stretch !important; }
+
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVE — TABLET
+═══════════════════════════════════════════════════════════ */
+@media (max-width: 1060px) {
+  :root { --slide-pad: 56px; }
+  #nav { padding: 0 32px; }
+  #dot-nav { display: none; }
+
+  .hero-layout         { grid-template-columns: 1fr; }
+  .hero-panel          { display: none; }
+  .hero-main           { border-right: none; padding: var(--slide-pad) 32px; }
+  .hero-main::before   { display: none; }
+
+  .mission-grid, .model-grid,
+  .contact-grid        { grid-template-columns: 1fr; gap: 48px; }
+  .challenge-grid      { grid-template-columns: 1fr; gap: 48px; }
+
+  .services-top        { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .services-intro      { text-align: left; max-width: 100%; }
+
+  .slide               { padding: var(--slide-pad) 32px; }
+  .scroll-cue          { left: 32px; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVE — MOBILE
+═══════════════════════════════════════════════════════════ */
+@media (max-width: 600px) {
+  :root { --nav-h: 52px; --slide-pad: 36px; }
+  #nav  { padding: 0 20px; }
+  .nav-wordmark { font-size: 0.75rem; letter-spacing: 0.05em; }
+  #export-btn   { padding: 6px 12px; font-size: 0.68rem; }
+  #slide-counter{ display: none; }
+  #kbd-hint     { display: none; }
+  #dot-nav      { display: none; }
+
+  /* On mobile: free scroll (snap is jarring on touch) */
+  #deck {
+    scroll-snap-type: none;
+    position: fixed;
+    overflow-y: auto;
+  }
+  .slide {
+    height: auto;
+    min-height: calc(100dvh - var(--nav-h) - var(--prog-h));
+    scroll-snap-align: unset;
+    padding: var(--slide-pad) 20px;
+    align-items: flex-start;
+    overflow: hidden;
+  }
+  .slide-hero     { min-height: calc(100dvh - var(--nav-h) - var(--prog-h)); }
+
+  .hero-layout    { grid-template-columns: 1fr; }
+  .hero-panel     { display: none; }
+  .hero-main      { padding: 40px 20px 56px; border-right: none; justify-content: flex-start; }
+  .hero-main::before { display: none; }
+  .hero-h1        { font-size: clamp(2.6rem, 10vw, 3.8rem); }
+  .hero-actions   { flex-direction: column; gap: 10px; }
+  .btn-fill, .btn-outline { width: 100%; text-align: center; }
+  .scroll-cue     { display: none; }
+
+  .mission-grid, .model-grid,
+  .challenge-grid, .contact-grid { grid-template-columns: 1fr; gap: 36px; }
+  .services-top   { flex-direction: column; gap: 12px; margin-bottom: 24px; }
+  .services-intro { text-align: left; }
+  .svc-cols       { grid-template-columns: 1fr; }
+  .svc-col        { padding: 28px 22px; }
+  .avail          { padding: 26px 22px; }
+}
+
+@media (max-width: 380px) {
+  .slide { padding: 28px 16px 48px; }
+  .hero-main { padding: 32px 16px 48px; }
+  .hero-h1 { font-size: 2.5rem; }
+}
   </style>
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav id="nav">
-    <span class="nav-logo">GSR <em>&</em> Associates</span>
-    <a href="#contact" class="nav-cta">Get in Touch</a>
-  </nav>
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-brand">
+    <div class="nav-mark"><span>GSR</span></div>
+    <span class="nav-wordmark">GSR &amp; Associates</span>
+  </div>
+  <div class="nav-right">
+    <span id="slide-counter">01 / 06</span>
+    <button id="export-btn">Export PDF</button>
+  </div>
+</nav>
 
-  <!-- HERO -->
-  <section id="hero">
-    <div class="hero-inner">
-      <div class="hero-left">
-        <div class="hero-label reveal">GSR &amp; Associates</div>
-        <h1 class="hero-h1 reveal" style="transition-delay:80ms">
+<!-- PROGRESS -->
+<div id="progress"><div id="progress-fill"></div></div>
+
+<!-- DOT NAV -->
+<div id="dot-nav"></div>
+
+<!-- KEYBOARD HINT -->
+<div id="kbd-hint">
+  <kbd>Space</kbd> or <kbd>↑</kbd><kbd>↓</kbd> to navigate
+</div>
+
+<!-- DECK -->
+<div id="deck">
+
+  <!-- SLIDE 1: HERO -->
+  <div class="slide slide-hero" id="s0">
+    <div class="hero-layout">
+      <div class="hero-main">
+        <div class="hero-tag"     data-a data-d="0">GSR &amp; Associates</div>
+        <h1 class="hero-h1"       data-a data-d="1">
           Growing Leaders,<br>
-          <span class="accent">Scaling Vision,</span><br>
+          <em>Scaling Vision,</em><br>
           Together.
         </h1>
-        <p class="hero-body reveal" style="transition-delay:160ms">
+        <p class="hero-body"      data-a data-d="2">
           Every founder has a vision that can change industries, communities, even countries.
           But scaling that vision is lonely and full of obstacles.
           At GSR &amp; Associates, we don't just advise — we walk the journey with you.
         </p>
-        <div class="hero-actions reveal" style="transition-delay:240ms">
-          <a href="#contact" class="btn-primary">Partner With Us</a>
-          <a href="#model" class="btn-ghost">How It Works</a>
+        <div class="hero-actions" data-a data-d="3">
+          <a href="#s5" class="btn-fill"    onclick="goTo(5);return false;">Partner With Us</a>
+          <a href="#s3" class="btn-outline" onclick="goTo(3);return false;">How It Works</a>
+        </div>
+        <div class="scroll-cue"   data-a data-d="4">
+          <div class="scroll-cue-line"></div>Scroll to explore
         </div>
       </div>
-      <div class="hero-stats reveal" style="transition-delay:200ms">
-        <div class="hero-stat">
-          <div class="stat-label">Model</div>
-          <div class="stat-val amber">Founder-First</div>
-          <div class="stat-note">We succeed when you succeed</div>
+      <div class="hero-panel" data-a data-d="2">
+        <div class="h-stat">
+          <div class="h-stat-label">Our Model</div>
+          <div class="h-stat-val gold">Founder-First</div>
+          <div class="h-stat-note">We succeed when you succeed</div>
         </div>
-        <div class="hero-stat">
-          <div class="stat-label">Engagement</div>
-          <div class="stat-val">12 Months</div>
-          <div class="stat-note">Structured, milestone-driven</div>
+        <div class="h-stat">
+          <div class="h-stat-label">Engagement</div>
+          <div class="h-stat-val">12 Months</div>
+          <div class="h-stat-note">Structured, milestone-driven</div>
         </div>
-        <div class="hero-stat">
-          <div class="stat-label">Capital Access</div>
-          <div class="stat-val">Global</div>
-          <div class="stat-note">Local &amp; international networks</div>
+        <div class="h-stat">
+          <div class="h-stat-label">Capital Access</div>
+          <div class="h-stat-val">Global</div>
+          <div class="h-stat-note">Local &amp; international networks</div>
         </div>
-        <div class="hero-stat">
-          <div class="stat-label">Alignment</div>
-          <div class="stat-val amber">Equity</div>
-          <div class="stat-note">Skin in the game, not just advice</div>
+        <div class="h-stat">
+          <div class="h-stat-label">Alignment</div>
+          <div class="h-stat-val gold">Equity</div>
+          <div class="h-stat-note">Skin in the game, not just advice</div>
         </div>
+        <a href="#s5" class="hero-panel-cta" onclick="goTo(5);return false;">Begin the Conversation</a>
       </div>
     </div>
-    <div class="hero-scroll">
-      <div class="scroll-line"></div>
-      Scroll
-    </div>
-  </section>
+  </div>
 
-  <!-- MISSION -->
-  <section id="mission">
-    <div class="inner">
+  <!-- SLIDE 2: MISSION -->
+  <div class="slide slide-mission" id="s1">
+    <div class="slide-inner">
       <div class="mission-grid">
         <div class="mission-left">
-          <div class="label reveal">Our Mission</div>
-          <h2 class="reveal" style="transition-delay:80ms">
-            We believe in<br><em>founders,</em><br>not formulas.
-          </h2>
-          <p class="mission-body reveal" style="transition-delay:160ms">
+          <div class="eyebrow"        data-a data-d="0">Our Mission</div>
+          <h2                          data-a data-d="1">We believe in<br><em>founders,</em><br>not formulas.</h2>
+          <p class="mission-body"      data-a data-d="2">
             GSR invests in founders, ideas, and dreams — and grows alongside them.
-            We're not a consultancy that hands you a report and walks away.
+            We are not a consultancy that hands you a report and walks away.
             We are partners in vision, risk, and success.
           </p>
-          <p class="mission-quote reveal" style="transition-delay:220ms">
+          <p class="mission-pull"      data-a data-d="3">
             The gap between a brilliant idea and global impact<br>
             requires more than advice — it requires a partner.
           </p>
         </div>
-        <div class="pillars reveal" style="transition-delay:120ms">
-          <div class="pillar">
-            <div class="pillar-n">01</div>
-            <div>
-              <div class="pillar-name">True Partnership</div>
-              <div class="pillar-desc">We invest in your vision, not just your metrics. Our interests are aligned with yours at every stage.</div>
-            </div>
-          </div>
-          <div class="pillar">
-            <div class="pillar-n">02</div>
-            <div>
-              <div class="pillar-name">Global Reach</div>
-              <div class="pillar-desc">Established connections across markets, industries and jurisdictions on every continent.</div>
-            </div>
-          </div>
-          <div class="pillar">
-            <div class="pillar-n">03</div>
-            <div>
-              <div class="pillar-name">Scale Infrastructure</div>
-              <div class="pillar-desc">Systems and strategies architected for sustained, exponential growth without cultural compromise.</div>
-            </div>
-          </div>
-          <div class="pillar">
-            <div class="pillar-n">04</div>
-            <div>
-              <div class="pillar-name">Ideas Before Trends</div>
-              <div class="pillar-desc">We identify and back transformative ideas before they become conventional wisdom.</div>
-            </div>
-          </div>
+        <div class="pillars"           data-a data-d="2">
+          <div class="pillar"><div class="pil-n">01</div><div><div class="pil-title">True Partnership</div><div class="pil-desc">We invest in your vision, not just your metrics. Our interests are aligned with yours at every stage.</div></div></div>
+          <div class="pillar"><div class="pil-n">02</div><div><div class="pil-title">Global Reach</div><div class="pil-desc">Established connections across markets, industries and jurisdictions on every continent.</div></div></div>
+          <div class="pillar"><div class="pil-n">03</div><div><div class="pil-title">Scale Infrastructure</div><div class="pil-desc">Systems and strategies architected for sustained, exponential growth without cultural compromise.</div></div></div>
+          <div class="pillar"><div class="pil-n">04</div><div><div class="pil-title">Ideas Before Trends</div><div class="pil-desc">We identify and back transformative ideas before they become conventional wisdom.</div></div></div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- CHALLENGE -->
-  <section id="challenge">
-    <div class="inner">
+  <!-- SLIDE 3: CHALLENGE -->
+  <div class="slide slide-challenge" id="s2">
+    <div class="slide-inner">
       <div class="challenge-grid">
         <div class="challenge-left">
-          <div class="label reveal">The Challenge</div>
-          <h2 class="reveal" style="transition-delay:80ms">
-            The world loses great ideas when founders face this <em>alone.</em>
-          </h2>
-          <p class="challenge-body reveal" style="transition-delay:160ms">
-            Many founders struggle with barriers that are simply too complex to navigate in isolation.
-            The gap between a brilliant idea and global impact requires more than advice —
-            it requires a partner with skin in the game.
-          </p>
+          <div class="eyebrow"          data-a data-d="0">The Challenge</div>
+          <h2                            data-a data-d="1">The world loses great ideas when founders face this <em>alone.</em></h2>
+          <div class="hdivide"           data-a data-d="2"></div>
+          <p class="challenge-body"      data-a data-d="3">Many founders struggle with barriers too complex to navigate in isolation. The gap between a brilliant idea and global impact requires a partner with skin in the game.</p>
         </div>
-        <div class="challenge-items reveal" style="transition-delay:100ms">
-          <div class="ch-item">
-            <div class="ch-num">01</div>
-            <div>
-              <div class="ch-text">Access to capital &amp; markets</div>
-              <div class="ch-sub">Knowing the right doors to knock on — and having the credibility to open them.</div>
-            </div>
-          </div>
-          <div class="ch-item">
-            <div class="ch-num">02</div>
-            <div>
-              <div class="ch-text">Commercialising innovative ideas</div>
-              <div class="ch-sub">Translating a breakthrough concept into a structured, scalable business model.</div>
-            </div>
-          </div>
-          <div class="ch-item">
-            <div class="ch-num">03</div>
-            <div>
-              <div class="ch-text">Navigating regulatory &amp; international landscapes</div>
-              <div class="ch-sub">Crossing borders and compliance frameworks without losing momentum.</div>
-            </div>
-          </div>
-          <div class="ch-item">
-            <div class="ch-num">04</div>
-            <div>
-              <div class="ch-text">Scaling without losing the mission</div>
-              <div class="ch-sub">Growth that preserves the culture and values that made the company worth building.</div>
-            </div>
-          </div>
+        <div class="ch-list"             data-a data-d="2">
+          <div class="ch-item"><div class="ch-num">01</div><div><div class="ch-title">Access to capital &amp; markets</div><div class="ch-sub">Knowing the right doors to knock on — and having the credibility to open them.</div></div></div>
+          <div class="ch-item"><div class="ch-num">02</div><div><div class="ch-title">Commercialising innovative ideas</div><div class="ch-sub">Translating a breakthrough concept into a structured, scalable business model.</div></div></div>
+          <div class="ch-item"><div class="ch-num">03</div><div><div class="ch-title">Navigating regulatory &amp; international landscapes</div><div class="ch-sub">Crossing borders and compliance frameworks without losing momentum.</div></div></div>
+          <div class="ch-item"><div class="ch-num">04</div><div><div class="ch-title">Scaling without losing the mission</div><div class="ch-sub">Growth that preserves the culture and values that made the company worth building.</div></div></div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- MODEL -->
-  <section id="model">
-    <div class="inner">
+  <!-- SLIDE 4: MODEL -->
+  <div class="slide slide-model" id="s3">
+    <div class="slide-inner">
       <div class="model-grid">
         <div class="model-left">
-          <div class="label reveal">Partnership Model</div>
-          <h2 class="reveal" style="transition-delay:80ms">
-            Every milestone,<br>every risk,<br>every <em>triumph.</em>
-          </h2>
-          <p class="model-body reveal" style="transition-delay:160ms">
-            GSR invests alongside you. We succeed when you succeed.
-            We are present through every critical decision — celebrating
-            wins and navigating setbacks with equal commitment.
-          </p>
-          <div class="model-quote reveal" style="transition-delay:220ms">
-            "GSR didn't just advise us — they invested in us."
-          </div>
+          <div class="eyebrow"      data-a data-d="0">Partnership Model</div>
+          <h2                        data-a data-d="1">Every milestone,<br>every risk,<br>every <em>triumph.</em></h2>
+          <p class="model-body"      data-a data-d="2">GSR invests alongside you. We succeed when you succeed. We are present through every critical decision — celebrating wins and navigating setbacks with equal commitment.</p>
+          <div class="model-quote"   data-a data-d="3">"GSR didn't just advise us — they invested in us."</div>
         </div>
-        <div class="reveal" style="transition-delay:120ms">
+        <div                         data-a data-d="2">
           <div class="tl-head">12-Month Engagement Framework</div>
           <div class="tl">
-            <div class="tl-row">
-              <div class="tl-period">Month 1–3</div>
-              <div class="tl-act">Market Research &amp; Strategy</div>
-            </div>
-            <div class="tl-row">
-              <div class="tl-period">Month 4–6</div>
-              <div class="tl-act">Network Activation &amp; Introductions</div>
-            </div>
-            <div class="tl-row">
-              <div class="tl-period">Month 7–9</div>
-              <div class="tl-act">Capital Raising &amp; Deal Structuring</div>
-            </div>
-            <div class="tl-row">
-              <div class="tl-period">Month 10–12</div>
-              <div class="tl-act">Scale, Optimise &amp; Expand</div>
-            </div>
+            <div class="tl-row"><div class="tl-period">Month 1–3</div><div class="tl-act">Market Research &amp; Strategy</div></div>
+            <div class="tl-row"><div class="tl-period">Month 4–6</div><div class="tl-act">Network Activation &amp; Introductions</div></div>
+            <div class="tl-row"><div class="tl-period">Month 7–9</div><div class="tl-act">Capital Raising &amp; Deal Structuring</div></div>
+            <div class="tl-row"><div class="tl-period">Month 10–12</div><div class="tl-act">Scale, Optimise &amp; Expand</div></div>
           </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- SERVICES -->
-  <section id="services">
-    <div class="inner">
-      <div class="services-head">
+  <!-- SLIDE 5: SERVICES -->
+  <div class="slide slide-services" id="s4">
+    <div class="slide-inner">
+      <div class="services-top">
         <div>
-          <div class="label reveal">What We Do</div>
-          <h2 class="reveal" style="transition-delay:80ms">Our Core Services</h2>
+          <div class="eyebrow" data-a data-d="0">What We Do</div>
+          <h2 data-a data-d="1">Our Core Services</h2>
         </div>
-        <p class="services-intro reveal" style="transition-delay:120ms">
-          Two disciplines, one integrated approach.
-          Capital and strategy working in parallel so nothing falls through the gap.
-        </p>
+        <p class="services-intro" data-a data-d="2">Two disciplines, one integrated approach. Capital and strategy working in parallel so nothing falls through the gap.</p>
       </div>
-      <div class="services-cols reveal" style="transition-delay:160ms">
+      <div class="svc-cols" data-a data-d="3">
         <div class="svc-col">
-          <div class="svc-title">Capital &amp; Markets</div>
+          <div class="svc-col-title">Capital &amp; Markets</div>
           <div class="svc-items">
             <div class="svc-item">Unlock access to local and global investor networks</div>
             <div class="svc-item">Structure deals that protect founder equity</div>
@@ -1138,7 +1132,7 @@
           </div>
         </div>
         <div class="svc-col">
-          <div class="svc-title">Strategy &amp; Growth</div>
+          <div class="svc-col-title">Strategy &amp; Growth</div>
           <div class="svc-items">
             <div class="svc-item">Translate vision into executable go-to-market plans</div>
             <div class="svc-item">Navigate regulatory and international landscapes</div>
@@ -1147,108 +1141,221 @@
         </div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- CONTACT -->
-  <section id="contact">
-    <div class="inner">
+  <!-- SLIDE 6: CONTACT -->
+  <div class="slide slide-contact" id="s5">
+    <div class="slide-inner">
       <div class="contact-grid">
         <div class="contact-left">
-          <div class="label reveal">Get In Touch</div>
-          <h2 class="reveal" style="transition-delay:80ms">
-            Ready to scale<br>your <em>vision?</em>
-          </h2>
-          <p class="contact-body reveal" style="transition-delay:160ms">
-            We work with a select number of founders each year to ensure every
-            engagement receives genuine investment and our full commitment.
-            We welcome an initial conversation at your convenience.
-          </p>
-          <div class="contact-links reveal" style="transition-delay:220ms">
-            <a href="mailto:hello@gsrassociates.com" class="contact-link" target="_blank" rel="noopener">
-              <div class="cl-left">
-                <span class="cl-type">Email</span>
-                <span class="cl-val">hello@gsrassociates.com</span>
-              </div>
-              <span class="cl-arrow">↗</span>
+          <div class="eyebrow"      data-a data-d="0">Get In Touch</div>
+          <h2                        data-a data-d="1">Ready to scale<br>your <em>vision?</em></h2>
+          <p class="contact-body"    data-a data-d="2">We work with a select number of founders each year to ensure every engagement receives genuine investment and our full commitment. We welcome an initial conversation at your convenience.</p>
+          <div class="c-links"       data-a data-d="3">
+            <a href="mailto:hello@gsrassociates.com" class="c-link" target="_blank" rel="noopener">
+              <div class="c-meta"><span class="c-type">Email</span><span class="c-val">hello@gsrassociates.com</span></div>
+              <span class="c-arrow">↗</span>
             </a>
-            <a href="https://gsrassociates.com" class="contact-link" target="_blank" rel="noopener">
-              <div class="cl-left">
-                <span class="cl-type">Website</span>
-                <span class="cl-val">gsrassociates.com</span>
-              </div>
-              <span class="cl-arrow">↗</span>
+            <a href="https://gsrassociates.com" class="c-link" target="_blank" rel="noopener">
+              <div class="c-meta"><span class="c-type">Website</span><span class="c-val">gsrassociates.com</span></div>
+              <span class="c-arrow">↗</span>
             </a>
-            <a href="https://linkedin.com" class="contact-link" target="_blank" rel="noopener">
-              <div class="cl-left">
-                <span class="cl-type">LinkedIn</span>
-                <span class="cl-val">GSR &amp; Associates</span>
-              </div>
-              <span class="cl-arrow">↗</span>
+            <a href="https://linkedin.com" class="c-link" target="_blank" rel="noopener">
+              <div class="c-meta"><span class="c-type">LinkedIn</span><span class="c-val">GSR &amp; Associates</span></div>
+              <span class="c-arrow">↗</span>
             </a>
-            <a href="tel:+1234567890" class="contact-link" target="_blank" rel="noopener">
-              <div class="cl-left">
-                <span class="cl-type">Schedule a Call</span>
-                <span class="cl-val">Request a time that suits you</span>
-              </div>
-              <span class="cl-arrow">↗</span>
+            <a href="tel:+1234567890" class="c-link" target="_blank" rel="noopener">
+              <div class="c-meta"><span class="c-type">Schedule a Call</span><span class="c-val">Request a time that suits you</span></div>
+              <span class="c-arrow">↗</span>
             </a>
           </div>
         </div>
-
-        <div class="avail-card reveal" style="transition-delay:160ms">
+        <div class="avail"           data-a data-d="3">
           <div class="avail-status">
             <div class="avail-dot"></div>
-            <span class="avail-label">Accepting Partners</span>
+            <span class="avail-status-lbl">Accepting Partners</span>
           </div>
           <div class="avail-title">Select engagements only</div>
-          <p class="avail-body">
-            GSR &amp; Associates limits active partnerships to ensure each
-            founder receives dedicated attention, genuine investment, and
-            measurable outcomes. Spaces are limited each year.
-          </p>
+          <p class="avail-body">GSR &amp; Associates limits active partnerships to ensure each founder receives dedicated attention, genuine investment, and measurable outcomes. Spaces are limited each year.</p>
           <a href="mailto:hello@gsrassociates.com" class="avail-cta">Request an Introduction</a>
-          <p class="avail-meta">No commitment. We'll respond within 48 hours.</p>
+          <p class="avail-note">No commitment. We respond within 48 hours.</p>
         </div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- FOOTER -->
-  <footer id="footer">
-    <span class="footer-logo">GSR <em>&</em> Associates</span>
-    <span class="footer-note">Growing Leaders, Scaling Vision, Together.</span>
-  </footer>
+</div><!-- /deck -->
 
-  <script>
-    // Scroll-triggered reveal — clean IntersectionObserver, no snap, no timers
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          observer.unobserve(e.target); // fire once only
-        }
-      });
-    }, { threshold: 0.15 });
+<script>
+/* ─────────────────────────────────────────────────────
+   PRESENTATION ENGINE
+───────────────────────────────────────────────────── */
+const TOTAL   = 6;
+let current   = 0;
+let scrolling = false;
+let hintTimer;
 
-    // Observe all .reveal elements
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+const deck      = document.getElementById('deck');
+const fill      = document.getElementById('progress-fill');
+const counter   = document.getElementById('slide-counter');
+const dotNav    = document.getElementById('dot-nav');
+const hint      = document.getElementById('kbd-hint');
 
-    // Hero elements are visible immediately on load
-    document.querySelectorAll('#hero .reveal').forEach(el => {
-      setTimeout(() => el.classList.add('visible'), parseInt(el.style.transitionDelay || '0'));
+// ── Build dot nav ──────────────────────────────────
+for (let i = 0; i < TOTAL; i++) {
+  const d = document.createElement('div');
+  d.className = 'dot' + (i === 0 ? ' active' : '');
+  d.title = 'Slide ' + (i + 1);
+  d.addEventListener('click', () => goTo(i));
+  dotNav.appendChild(d);
+}
+
+// ── Go to slide ────────────────────────────────────
+function goTo(idx) {
+  idx = Math.max(0, Math.min(TOTAL - 1, idx));
+  const target = document.getElementById('s' + idx);
+  if (!target) return;
+  target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  setCurrent(idx);
+}
+
+function setCurrent(idx) {
+  current = idx;
+
+  // Progress bar
+  const pct = TOTAL > 1 ? (idx / (TOTAL - 1)) * 100 : 0;
+  fill.style.width = pct + '%';
+
+  // Counter
+  counter.textContent = String(idx + 1).padStart(2,'0') + ' / ' + String(TOTAL).padStart(2,'0');
+
+  // Dots
+  document.querySelectorAll('.dot').forEach((d, i) => {
+    d.classList.toggle('active', i === idx);
+  });
+
+  // Trigger animations on this slide
+  const slide = document.getElementById('s' + idx);
+  if (slide && !slide.classList.contains('in')) {
+    slide.classList.add('in');
+  }
+
+  // Hide keyboard hint after first navigation
+  hint.classList.add('hidden');
+  clearTimeout(hintTimer);
+}
+
+// ── IntersectionObserver — updates state on scroll ─
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting || e.intersectionRatio < 0.5) return;
+    const idx = parseInt(e.target.id.replace('s',''));
+    if (!isNaN(idx)) setCurrent(idx);
+  });
+}, { threshold: 0.5, root: deck });
+
+document.querySelectorAll('.slide').forEach(s => io.observe(s));
+
+// ── Keyboard navigation ────────────────────────────
+document.addEventListener('keydown', e => {
+  const isMobile = window.innerWidth <= 600;
+  if (isMobile) return; // let mobile scroll naturally
+
+  const fwd = ['ArrowDown','ArrowRight','PageDown'];
+  const bck = ['ArrowUp','ArrowLeft','PageUp','Backspace'];
+
+  if (e.key === ' ') {
+    e.preventDefault();
+    goTo(current + (e.shiftKey ? -1 : 1));
+  } else if (fwd.includes(e.key)) {
+    e.preventDefault(); goTo(current + 1);
+  } else if (bck.includes(e.key)) {
+    e.preventDefault(); goTo(current - 1);
+  }
+});
+
+// ── Mouse wheel — snap to next/prev ───────────────
+let wheelTimer;
+deck.addEventListener('wheel', e => {
+  if (window.innerWidth <= 600) return;
+  e.preventDefault();
+  clearTimeout(wheelTimer);
+  wheelTimer = setTimeout(() => {
+    if (e.deltaY > 30)       goTo(current + 1);
+    else if (e.deltaY < -30) goTo(current - 1);
+  }, 50);
+}, { passive: false });
+
+// ── Touch swipe — mobile ───────────────────────────
+// On mobile we just let natural scroll happen
+// Observer fires setCurrent when slide is 50% visible
+
+// ── Show hint briefly, then hide ──────────────────
+hintTimer = setTimeout(() => hint.classList.add('hidden'), 4000);
+
+// ── Trigger first slide immediately ───────────────
+setCurrent(0);
+
+/* ─────────────────────────────────────────────────────
+   PDF EXPORT
+───────────────────────────────────────────────────── */
+document.getElementById('export-btn').addEventListener('click', async () => {
+  const btn = document.getElementById('export-btn');
+  btn.disabled = true; btn.textContent = 'Exporting…';
+  try {
+    await loadScript('https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js');
+    await loadScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js');
+
+    document.body.classList.add('exporting');
+    // Ensure all slides have .in so animations are shown
+    document.querySelectorAll('.slide').forEach(s => s.classList.add('in'));
+    // Reset any transition delays
+    document.querySelectorAll('[data-a]').forEach(el => {
+      el.style.opacity = '1'; el.style.transform = 'none'; el.style.transitionDelay = '0ms';
     });
 
-    // Smooth scroll for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', e => {
-        const target = document.querySelector(a.getAttribute('href'));
-        if (target) {
-          e.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF({ orientation:'landscape', unit:'px', format:[1920,1080] });
+
+    for (let i = 0; i < TOTAL; i++) {
+      const stage = document.createElement('div');
+      stage.id = 'pdf-stage';
+      document.body.appendChild(stage);
+      const clone = document.getElementById('s'+i).cloneNode(true);
+      clone.classList.add('in');
+      clone.querySelectorAll('[data-a]').forEach(el => {
+        el.style.opacity = '1'; el.style.transform = 'none';
       });
-    });
-  </script>
+      stage.appendChild(clone);
+
+      const cvs = await html2canvas(stage, {
+        scale:2, useCORS:true,
+        width:1920, height:1080,
+        windowWidth:1920, windowHeight:1080,
+      });
+      if (i > 0) pdf.addPage([1920,1080],'landscape');
+      pdf.addImage(cvs.toDataURL('image/png'),'PNG',0,0,1920,1080);
+      document.body.removeChild(stage);
+    }
+    pdf.save('gsr-associates.pdf');
+  } catch(err) {
+    console.error(err);
+    alert('Export failed — ensure cdnjs.cloudflare.com is reachable.');
+  } finally {
+    document.body.classList.remove('exporting');
+    btn.disabled = false; btn.textContent = 'Export PDF';
+  }
+});
+
+function loadScript(src) {
+  return new Promise((res,rej) => {
+    if (document.querySelector(`script[src="${src}"]`)) return res();
+    const s = document.createElement('script');
+    s.src = src; s.onload = res; s.onerror = rej;
+    document.head.appendChild(s);
+  });
+}
+</script>
 
 </body>
 </html>
